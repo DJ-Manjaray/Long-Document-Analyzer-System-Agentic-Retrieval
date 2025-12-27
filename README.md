@@ -1,6 +1,6 @@
 # Long-Document-Analyzer-System-Agentic-Retrieval
 RAG-without-Embeddings method, replaces "vector searching" with "intelligent text filtering", Making RAG cheaper, simpler to set up, and often more accurate for complex queries.
-Built an AI application for uploading PDF documents and asking intelligent questions using RAG (Retrieval-Augmented Generation) with hierarchical document navigation.
+Built a simple RAG application for uploading PDF documents and asking intelligent questions using RAG (Retrieval-Augmented Generation) with hierarchical document navigation.
 
 <img width="1453" height="814" alt="image" src="https://github.com/user-attachments/assets/8cf4eb54-4d02-4030-a941-ea6b07c6961c" />
 
