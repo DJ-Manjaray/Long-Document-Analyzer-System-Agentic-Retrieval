@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: legal-rag-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    networks:
+      - legal-rag-network
+
+  backend:
+    build: ./backend
+    container_name: legal-rag-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/uploads:/app/uploads
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      MONGODB_URL: mongodb://admin:password123@mongodb:27017
+    depends_on:
+      - mongodb
+    networks:
+      - legal-rag-network
+
+  frontend:
+    build: ./frontend
+    container_name: legal-rag-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - legal-rag-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  legal-rag-network:
+    driver: bridge
+
